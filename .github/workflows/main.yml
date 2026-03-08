@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       agent_name:
-        description: 'agent name'
+        description: 'Agent name'
         required: true
         default: 'aldrian'
       agent_description:
@@ -25,10 +25,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install ClawHub
-        run: npx clawhub@latest install verified-agent-identity
-
-      - name: Install script dependencies
+      - name: Install dependencies
         run: npm install
         working-directory: scripts
 
@@ -38,4 +35,4 @@ jobs:
       - name: Link Human to Agent
         run: |
           node scripts/manualLinkHumanToAgent.js \
-          --challenge "{\"name\": \"${{ github.event.inputs.agent_name }}\", \"description\": \"${{ github.event.inputs.agent_description }}\"}"
+          --challenge "{\"name\":\"${{ github.event.inputs.agent_name }}\",\"description\":\"${{ github.event.inputs.agent_description }}\"}"
